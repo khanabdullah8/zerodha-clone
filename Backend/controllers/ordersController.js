@@ -1,5 +1,6 @@
-const { OrdersModel } = require("../model/OrdersModel");
+const OrdersModel = require("../models/OrdersModel");
 
+// GET all orders
 const getOrders = async (req, res) => {
   try {
     const data = await OrdersModel.find({});
@@ -9,25 +10,14 @@ const getOrders = async (req, res) => {
   }
 };
 
+// POST new order (BUY)
 const createOrder = async (req, res) => {
   try {
-    const { name, qty, price, mode } = req.body;
-
-    if (!name || !qty || !price || !mode) {
-      return res.status(400).json({ message: "Missing fields" });
-    }
-
-    const newOrder = new OrdersModel({ name, qty, price, mode });
+    const newOrder = new OrdersModel(req.body);
     await newOrder.save();
-
-    res.status(201).json({
-      success: true,
-      message: "Order saved",
-      order: newOrder
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: "Order placed successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 

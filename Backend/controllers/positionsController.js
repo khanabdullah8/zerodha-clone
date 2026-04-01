@@ -1,4 +1,4 @@
-const { PositionsModel } = require("../model/PositionsModel");
+const PositionsModel = require("../models/PositionsModel");
 
 const getPositions = async (req, res) => {
   try {

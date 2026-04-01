@@ -1,4 +1,4 @@
-const { HoldingsModel } = require("../model/HoldingsModel");
+const HoldingsModel = require("../models/HoldingsModel");
 
 const getHoldings = async (req, res) => {
   try {
